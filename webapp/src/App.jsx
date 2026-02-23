@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { DirectorMode } from './components/DirectorMode'
 
 const API_BASE = 'http://localhost:8000'
 const NUM_BARS = 28
@@ -16,6 +17,8 @@ const LANGUAGES = [
   { code: 'fa-IR',  label: 'Dari/Farsi', native: 'دری' },
   { code: 'ur-PK',  label: 'Urdu',       native: 'اردو' },
   { code: 'ha-NG',  label: 'Hausa',      native: 'Hausa' },
+  { code: 'yo-NG',  label: 'Yoruba',     native: 'Yorùbá' },
+  { code: 'ig-NG',  label: 'Igbo',       native: 'Asụsụ Igbo' },
   { code: 'sw-KE',  label: 'Swahili',    native: 'Kiswahili' },
   { code: 'my-MM',  label: 'Burmese',    native: 'မြန်မာ' },
   { code: 'uk-UA',  label: 'Ukrainian',  native: 'Українська' },
@@ -41,6 +44,7 @@ export default function App() {
   const [showLangMenu, setShowLangMenu] = useState(false)
   const [conversation, setConversation] = useState([]) // [{role:'user'|'nova', text, ts}]
   const [inputText, setInputText] = useState('')
+  const [directorMode, setDirectorMode] = useState(false)
   const chatEndRef = useRef(null)
   const animRef = useRef(null)
   const recognitionRef = useRef(null)
@@ -198,7 +202,7 @@ export default function App() {
         {/* Language selector */}
         <div style={{ position:'relative' }}>
           <div style={{ fontSize:10, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'.1em', marginBottom:6 }}>Language / لغة</div>
-          <button onClick={() => setShowLangMenu(v => !v)} style={{ width:'100%', padding:'8px 12px', borderRadius:8, background:'rgba(99,102,241,0.15)', border:'1px solid rgba(99,102,241,0.3)', color:'#a5b4fc', fontSize:13, cursor:'pointer', textAlign:'left', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+          <button id="language-select" onClick={() => setShowLangMenu(v => !v)} style={{ width:'100%', padding:'8px 12px', borderRadius:8, background:'rgba(99,102,241,0.15)', border:'1px solid rgba(99,102,241,0.3)', color:'#a5b4fc', fontSize:13, cursor:'pointer', textAlign:'left', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <span>{selectedLang.native}</span>
             <span style={{ fontSize:10 }}>▼</span>
           </button>
@@ -223,6 +227,13 @@ export default function App() {
             Clear conversation
           </button>
         )}
+
+        <button 
+          onClick={() => setDirectorMode(true)} 
+          style={{ marginTop: conversation.length > 0 ? 8 : 'auto', padding:'10px 12px', borderRadius:8, background:'rgba(99,102,241,0.1)', border:'1px solid rgba(99,102,241,0.3)', color:'#a5b4fc', fontSize:11, fontWeight:700, cursor:'pointer', textTransform:'uppercase', letterSpacing:'0.05em' }}
+        >
+          🎬 Start Demo Mode
+        </button>
       </div>
 
       {/* Main */}
@@ -320,7 +331,7 @@ export default function App() {
             {speaking && (
               <div style={{ position:'absolute', inset:-6, borderRadius:'50%', border:'2px solid rgba(16,185,129,0.5)', animation:'ping 1s ease-out infinite' }} />
             )}
-            <button onClick={handleMicClick} disabled={loading}
+            <button id="mic-button" onClick={handleMicClick} disabled={loading}
               style={{ width:56, height:56, borderRadius:'50%',
                 background: listening ? 'radial-gradient(circle,#ef4444,#b91c1c)' : speaking ? 'radial-gradient(circle,#10b981,#065f46)' : 'radial-gradient(circle,#6366f1,#4338ca)',
                 border:'none', cursor:loading?'wait':'pointer', fontSize:24,
@@ -333,6 +344,7 @@ export default function App() {
           {/* Text input */}
           <form onSubmit={handleSendText} style={{ flex:1, display:'flex', gap:8 }}>
             <input
+              id="chat-input"
               value={inputText}
               onChange={e => setInputText(e.target.value)}
               placeholder={`Type in ${selectedLang.native}…`}
@@ -345,6 +357,13 @@ export default function App() {
           </form>
         </div>
       </div>
+
+      {directorMode && (
+        <DirectorMode 
+          onClose={() => setDirectorMode(false)} 
+          onSelectLanguage={(code) => setLang(code)}
+        />
+      )}
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap');
