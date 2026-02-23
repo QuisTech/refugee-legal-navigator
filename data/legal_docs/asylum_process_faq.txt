@@ -1,0 +1,98 @@
+PRACTICAL GUIDE TO THE ASYLUM PROCESS
+Frequently Asked Questions for Asylum Seekers in the United States
+
+Q: WHAT DOCUMENTS DO I NEED TO APPLY FOR ASYLUM?
+You should gather as many of the following as possible, though not all are required:
+- Identity documents: passport, national ID card, birth certificate
+- Evidence of persecution: police reports, hospital/medical records, photographs, videos, news articles, witness statements
+- Country condition evidence: human rights reports from Amnesty International, Human Rights Watch, US State Department Country Reports on Human Rights Practices, Freedom House reports, UNHCR Country of Origin Information
+- Personal statement: A detailed written account of your persecution or fear of persecution (this is submitted with Form I-589 or presented to the immigration judge)
+- Expert reports: psychological evaluations documenting trauma; country expert declarations
+- Proof of membership in a persecuted group: church membership, party membership cards, certificates, letters from organizations
+- Documents showing family ties if claiming derivative asylum
+
+Q: HOW DO I APPLY FOR ASYLUM?
+Affirmative Process: If you are not in removal proceedings, file Form I-589 (Application for Asylum and Withholding of Removal) directly with USCIS. There is no filing fee for Form I-589.
+Defensive Process: If you are in removal proceedings before an Immigration Judge, you must file the I-589 with the Immigration Court before the deadline set by the judge.
+You must file within one year of arrival unless you qualify for an exception.
+
+Q: WHAT HAPPENS AFTER I FILE MY ASYLUM APPLICATION?
+1. You will receive a receipt notice confirming your application was filed.
+2. You will be scheduled for a biometrics appointment (fingerprints, photo) at an ASC.
+3. For affirmative applications: USCIS will schedule an interview with an asylum officer (currently experiencing long delays — often 2 or more years).
+4. You may apply for an Employment Authorization Document (EAD) 150 days after filing.
+
+Q: CAN I WORK WHILE MY ASYLUM CASE IS PENDING?
+Yes. You must wait 180 days after filing a complete asylum application before you are eligible to receive work authorization. You apply for work authorization using Form I-765. Once issued, you can legally work in the United States while your case is pending. Your employer can verify your work authorization using E-Verify.
+
+Q: WHAT IS THE CREDIBLE FEAR INTERVIEW?
+If you are apprehended at or near the border and placed in expedited removal proceedings, a USCIS asylum officer will conduct a credible fear interview to determine if you have a credible fear of persecution or torture. You must express a fear of return and demonstrate a significant possibility of establishing eligibility for asylum. If you pass the credible fear screening, you are referred to Immigration Court for full asylum proceedings.
+
+Q: WHAT IF MY ASYLUM APPLICATION IS DENIED?
+If denied by an asylum officer (affirmative): Your case is referred to an Immigration Judge for a full de novo hearing. The denial by the asylum officer does not bind the judge.
+If denied by an Immigration Judge: You have 30 days to file a Notice of Appeal with the Board of Immigration Appeals (BIA). The denial does not take effect while the appeal is pending.
+If denied by the BIA: You have 30 days to file a Petition for Review with the federal Circuit Court of Appeals. You may request a stay of removal.
+If all appeals are exhausted: You may be removed, but you may still apply for a Motion to Reopen if circumstances change, or explore other immigration relief.
+
+Q: WHAT IS WITHHOLDING OF REMOVAL AND HOW IS IT DIFFERENT FROM ASYLUM?
+Withholding of removal (INA § 241(b)(3)) prevents the government from removing you to a specific country where your life or freedom would be threatened. Key differences:
+- Higher standard: You must show it is "more likely than not" (51%+) you will be persecuted — compared to only a reasonable possibility for asylum
+- No path to permanent residence or citizenship
+- No derivative protection for family members
+- Not subject to one-year filing deadline
+- Available even if bars to asylum apply (except persecution, danger to national security, or particularly serious crime)
+
+Q: WHAT PROTECTION IS AVAILABLE UNDER THE CONVENTION AGAINST TORTURE (CAT)?
+Even if you do not qualify for asylum or withholding of removal, you may be protected under the Convention Against Torture if you can show it is more likely than not that you would be tortured in the country of removal, and that torture would be inflicted by or with the acquiescence of a government official. CAT protection is available to anyone, including those with serious criminal convictions that bar asylum.
+
+Q: WHAT ARE MY RIGHTS WHILE MY ASYLUM CASE IS PENDING?
+- Right to remain in the United States while your case is pending (no removal while case is active)
+- Right to a lawyer (at no expense to the government)
+- Right to an interpreter in immigration court proceedings
+- Right to present evidence and witnesses
+- Right to appeal a denial
+- Right to apply for work authorization after 150 days
+- Right to protection from refoulement
+
+Q: CAN MY FAMILY MEMBERS ALSO GET ASYLUM?
+Yes. If you are granted asylum, your spouse and unmarried children under 21 may be included in your grant of asylum as derivative asylees if they are in the United States. You can also file Form I-730 (Refugee/Asylee Relative Petition) to bring qualifying family members to the United States within two years of your asylum grant. Derivative asylees receive the same rights as principal asylees.
+
+Q: WHAT HAPPENS AFTER I AM GRANTED ASYLUM?
+- You receive an I-94 showing asylee status
+- You are authorized to work immediately upon the grant
+- You may receive a Form I-730 to petition for qualifying family members
+- After one year from being granted asylum, you may apply for permanent residence (Green Card) using Form I-485
+- After five years as a permanent resident (four years for asylees, since one year of asylee status counts toward the residency requirement), you may apply for US citizenship if other requirements are met
+
+Q: WHAT IF I CANNOT AFFORD A LAWYER?
+Asylum seekers have the right to hire an attorney but there is no right to a free government-appointed attorney in immigration proceedings. However, many resources exist:
+- UNHCR registered legal partners
+- Immigration Legal Services programs (Catholic Charities, IRC, Lutheran Immigration and Refugee Service, RAICES, CLINIC, AILA Pro Bono programs)
+- Law school immigration clinics (provide free or low-cost services)
+- Legal aid organizations in your city or state
+- EOIR's List of Free Legal Service Providers (available at all immigration courts)
+- Accredited representatives of Board of Immigration Appeals-recognized organizations
+
+Q: WHAT HAPPENS IF I MISS MY ASYLUM INTERVIEW OR COURT HEARING?
+Failing to appear for a USCIS asylum interview will result in your case being dismissed. Failing to appear for an Immigration Court hearing will result in an order of removal being issued in absentia. You must notify USCIS or the court of any change of address (Form AR-11 and Form EOIR-33) within 5 days of moving. If you have a good reason for missing a hearing, you may file a Motion to Reopen.
+
+Q: WHAT IS TEMPORARY PROTECTED STATUS (TPS)?
+TPS is a temporary immigration status granted to eligible nationals from designated countries experiencing armed conflict, natural disaster, or other extraordinary conditions. TPS provides protection from removal and work authorization but is not a path to permanent residence. TPS is periodically renewed by the Secretary of Homeland Security and can be terminated. Currently designated countries include: Afghanistan, Burma, Cameroon, El Salvador, Ethiopia, Haiti, Honduras, Nepal, Nicaragua, Somalia, South Sudan, Sudan, Syria, Ukraine, Venezuela, and Yemen, among others.
+
+Q: WHAT IS DEFERRED ACTION AND DACA?
+Deferred Action is an exercise of prosecutorial discretion where DHS decides not to pursue removal of an individual for a set period, often renewed annually. DACA (Deferred Action for Childhood Arrivals) protects certain individuals who came to the US as children from removal and provides work authorization, but does not provide legal status or a path to permanent residence. DACA recipients came to the US before age 16 and before June 15, 2007, and meet education and criminal history requirements.
+
+Q: HOW CAN I CHECK MY CASE STATUS?
+USCIS cases: Check online at uscis.gov/case-status using your receipt number
+Immigration Court cases: Call the automated hotline at 1-800-898-7180 or check at acis.eoir.justice.gov
+BIA cases: Check at eoir.justice.gov
+
+Q: WHAT COUNTRY CONDITIONS REPORTS CAN I USE TO SUPPORT MY CASE?
+The following authoritative sources are commonly cited:
+- US Department of State Country Reports on Human Rights Practices (state.gov)
+- UNHCR Country of Origin Information and Eligibility Guidelines (unhcr.org)
+- Amnesty International Annual Report (amnesty.org)
+- Human Rights Watch World Report (hrw.org)
+- Freedom House Freedom in the World Report (freedomhouse.org)
+- Immigration and Refugee Board of Canada (IRB) country information (canada.ca)
+- EOIR Immigration Court's Virtual Law Library country condition materials

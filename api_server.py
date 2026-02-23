@@ -85,44 +85,54 @@ class VectorStore:
             json.dump({"chunks": self.chunks, "embeddings": self.embeddings}, f)
         logger.info(f"Saved {len(self.chunks)} embeddings to disk cache")
 
-    def load_document(self, path: str, chunk_size: int = 120):
+    def load_all_documents(self, docs_dir: str, chunk_size: int = 120):
         """
-        Loads document, splits into chunks.
+        Loads all .txt documents from docs_dir, splits into chunks.
         Uses disk cache if available — otherwise calls Titan and caches result.
         """
-        if not os.path.exists(path):
-            logger.warning(f"Document not found: {path}")
-            return
-
         # Fast path: use disk cache
         if self._load_cache():
             return
 
-        # Slow path: compute embeddings via Titan, then cache
-        with open(path, encoding="utf-8") as f:
-            text = f.read()
+        if not os.path.exists(docs_dir):
+            logger.warning(f"Legal docs directory not found: {docs_dir}")
+            return
 
-        words = text.split()
-        raw_chunks = [
-            " ".join(words[i:i + chunk_size])
-            for i in range(0, len(words), chunk_size)
-        ]
+        txt_files = sorted([f for f in os.listdir(docs_dir) if f.endswith(".txt")])
+        if not txt_files:
+            logger.warning(f"No .txt files found in {docs_dir}")
+            return
 
-        logger.info(f"Computing Titan embeddings for {len(raw_chunks)} chunks (this is a one-time operation)...")
+        logger.info(f"Loading {len(txt_files)} documents from {docs_dir}")
+        all_chunks = []
+        for fname in txt_files:
+            path = os.path.join(docs_dir, fname)
+            with open(path, encoding="utf-8") as f:
+                text = f.read()
+            words = text.split()
+            file_chunks = [
+                " ".join(words[i:i + chunk_size])
+                for i in range(0, len(words), chunk_size)
+            ]
+            all_chunks.extend(file_chunks)
+            logger.info(f"  {fname}: {len(file_chunks)} chunks ({len(words)} words)")
+
+        logger.info(f"Computing Titan embeddings for {len(all_chunks)} total chunks (one-time operation)...")
         nova = get_nova()
-        for i, chunk in enumerate(raw_chunks):
+        for i, chunk in enumerate(all_chunks):
             try:
                 emb = nova.get_embeddings(chunk)
                 self.chunks.append(chunk)
                 self.embeddings.append(emb)
-                logger.info(f"  Embedded chunk {i + 1}/{len(raw_chunks)}")
+                if (i + 1) % 5 == 0 or (i + 1) == len(all_chunks):
+                    logger.info(f"  Progress: {i + 1}/{len(all_chunks)} chunks embedded")
             except Exception as e:
                 logger.error(f"  Chunk {i} embedding failed: {e}")
 
         if self.chunks:
             self._save_cache()
             self.ready = True
-            logger.info("Vector store ready")
+            logger.info(f"Vector store ready: {len(self.chunks)} chunks from {len(txt_files)} documents")
 
     def query_sync(self, query_text: str, top_k: int = 3) -> list[str]:
         """
@@ -164,10 +174,10 @@ vector_store = VectorStore()
 @app.on_event("startup")
 async def startup_event():
     logger.info("=== Refugee Legal Navigator API starting up ===")
-    guide_path = os.path.join(os.path.dirname(__file__), "data", "legal_docs", "asylum_guide.txt")
-    # Run in thread pool so uvicorn stays responsive
+    docs_dir = os.path.join(os.path.dirname(__file__), "data", "legal_docs")
+    # Run in thread pool so uvicorn stays responsive during startup
     loop = asyncio.get_event_loop()
-    await loop.run_in_executor(_executor, vector_store.load_document, guide_path)
+    await loop.run_in_executor(_executor, vector_store.load_all_documents, docs_dir)
 
 
 # ── Models ────────────────────────────────────────────────────────────────────

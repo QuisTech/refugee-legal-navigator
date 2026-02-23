@@ -1,0 +1,97 @@
+UNITED STATES ASYLUM LAW — COMPREHENSIVE GUIDE
+Immigration and Nationality Act (INA) §§ 101(a)(42), 208, 241(b)(3)
+8 U.S.C. §§ 1101, 1158, 1231
+
+DEFINITION OF REFUGEE (INA § 101(a)(42))
+Under U.S. law, a refugee is any person who is outside their country of nationality and unable or unwilling to return because of persecution or a well-founded fear of persecution on account of race, religion, nationality, membership in a particular social group, or political opinion. Persons who ordered, incited, assisted, or participated in persecution of others do not qualify.
+
+WHO CAN APPLY FOR ASYLUM
+Any person physically present in the United States, regardless of immigration status, may apply for asylum. This includes persons who entered without authorization, persons on valid visas, students, workers, and tourists. Persons who are in expedited removal proceedings may seek asylum in a credible fear interview. Unaccompanied alien children have special procedural protections and their claims are adjudicated by USCIS regardless of whether they are in removal proceedings.
+
+THE ONE-YEAR FILING DEADLINE
+Asylum applications must generally be filed within one year of the applicant's last arrival in the United States (INA § 208(a)(2)(B)). Exceptions exist for:
+- Changed circumstances materially affecting eligibility (e.g., changed country conditions, change in law, change in applicant's circumstances including marriage, birth of child, conversion to a new religion)
+- Extraordinary circumstances relating to the delay (serious illness, legal disability, ineffective assistance of prior counsel, maintained lawful immigration status until recently)
+The applicant bears the burden of proof for establishing an exception to the one-year bar.
+
+TWO PATHWAYS TO ASYLUM IN THE UNITED STATES
+
+1. AFFIRMATIVE ASYLUM (not in removal proceedings)
+The applicant files Form I-589 (Application for Asylum and Withholding of Removal) with USCIS. An asylum officer conducts a non-adversarial interview. If approved, the applicant is granted asylum. If not approved and the applicant is not in lawful status, the case is referred to an Immigration Judge in removal proceedings for a de novo review.
+
+2. DEFENSIVE ASYLUM (in removal proceedings before Immigration Court)
+The applicant raises asylum as a defense to removal before an Immigration Judge (IJ) in the Executive Office for Immigration Review (EOIR). The asylum application is reviewed in an adversarial hearing with a DHS attorney representing the government. If denied by the IJ, the applicant may appeal to the Board of Immigration Appeals (BIA). If the BIA denies, the applicant may petition for review in the applicable federal Court of Appeals.
+
+ELIGIBILITY REQUIREMENTS — DETAILED
+
+Nexus Requirement: The persecution must be "on account of" one of the five protected grounds. The protected ground need not be the sole reason for persecution but must be "at least one central reason." Mixed motives are permissible.
+
+Persecution by Whom: Persecution may be carried out by government actors or by private individuals or groups that the government is unable or unwilling to control. Domestic violence, gang violence, and persecution by criminal organizations may qualify if the government is unable or unwilling to protect the victim.
+
+Severity of Harm: Persecution is more than mere harassment or discrimination. It encompasses threats to life, physical injury, imprisonment without due process, arbitrary arrest, severe restriction of liberty, denial of basic necessities of life, significant economic deprivation, and cumulative lesser harms.
+
+Internal Relocation: Even if the applicant faces persecution in one part of their country, asylum may be denied if the applicant can reasonably relocate within the country to avoid persecution. The burden shifts to the government to show internal relocation is reasonable if the persecution is by a government actor.
+
+BURDEN OF PROOF
+The applicant bears the burden of establishing eligibility by a preponderance of the evidence. An applicant's credible testimony alone may be sufficient to meet this burden even without corroborating evidence (REAL ID Act, INA § 208(b)(1)(B)(ii)).
+
+CREDIBILITY DETERMINATION
+Immigration judges assess credibility based on: demeanor and candor; internal consistency of statements; consistency with prior statements and country condition evidence; accuracy of country condition information; and sufficiency of corroboration when reasonably available. An adverse credibility finding does not automatically require denial if the applicant provides sufficient corroboration.
+
+BARS TO ASYLUM
+The following persons are ineligible for asylum:
+- Persons who persecuted others on account of a protected ground
+- Persons convicted of a "particularly serious crime" (aggravated felony by statute; other crimes require case-by-case analysis of nature, circumstances, and potential danger)
+- Persons who committed a "serious non-political crime" outside the US prior to arrival
+- Persons who pose a danger to US national security
+- Persons firmly resettled in a third country prior to arriving in the US
+- Persons who filed an application for protection in a safe third country (if Safe Third Country Agreement applies, e.g., US-Canada)
+
+WITHHOLDING OF REMOVAL (INA § 241(b)(3))
+Even if asylum is denied (due to a bar or procedural failure), an applicant may still be entitled to withholding of removal, which prohibits the government from removing the applicant to a country where their life or freedom would be threatened. The standard is higher than asylum: applicant must show it is "more likely than not" that they will be persecuted. Withholding does not provide a path to permanent residence.
+
+CONVENTION AGAINST TORTURE (CAT) PROTECTION
+Under the Convention Against Torture (CAT) and its implementing regulations (8 C.F.R. § 1208.16–18), removal must be withheld or deferred if it is more likely than not that the applicant would be tortured by or with the acquiescence of a public official in the country of removal. CAT protection is available regardless of criminal history bars that apply to asylum and withholding.
+
+WORK AUTHORIZATION
+Asylum applicants may apply for an Employment Authorization Document (EAD) (Form I-765) 150 days after filing a complete I-589. The EAD is issued 180 days after the asylum application was filed (the "asylum clock"). DHS action may stop the asylum clock if the applicant fails to appear for scheduling or the application is incomplete.
+
+TRAVEL WHILE ASYLUM IS PENDING
+Asylum applicants should NOT travel outside the United States while their application is pending, as this may be deemed an abandonment of the application and may provide grounds for removal.
+
+DERIVATIVE ASYLUM
+A principal applicant who is granted asylum may include their spouse and unmarried children under 21 on the asylum grant as derivative asylees, if they were listed on the I-589 or a separate I-730 petition is filed.
+
+ADJUSTMENT TO LAWFUL PERMANENT RESIDENCE
+An asylee may apply for adjustment of status to lawful permanent residence (Form I-485) one year after being granted asylum. The applicant must have been physically present in the US for one year after the grant of asylum and continue to meet eligibility requirements.
+
+KEY PRECEDENTS AND LEGAL STANDARDS
+
+Matter of Acosta, 19 I&N Dec. 211 (BIA 1985): Established the "ejusdem generis" rule for defining "particular social group." Members must share a common, immutable characteristic that they either cannot change or should not be required to change because it is fundamental to their individual identities or consciences.
+
+Matter of A-B-, 27 I&N Dec. 316 (A.G. 2018) and its reversal: The Biden administration issued guidance restoring asylum protections for survivors of domestic violence and gang violence, reversing restrictive interpretations.
+
+INS v. Cardoza-Fonseca, 480 U.S. 421 (1987): The Supreme Court established that the well-founded fear standard requires only a reasonable possibility of persecution, not a probability. A 10% chance of persecution may satisfy the standard.
+
+USCIS AFFIRMATIVE ASYLUM PROCESS — TIMELINE
+- File I-589 → fingerprints biometrics → interview scheduled (currently 2-4+ years backlog)
+- 150 days after filing: may apply for work authorization
+- 180 days after filing: work authorization issued
+- Interview with asylum officer → approval or referral to immigration court
+
+DEFENSIVE ASYLUM — REMOVAL PROCEEDINGS TIMELINE
+- Detainees: cases prioritized; hearings may occur within weeks
+- Non-detainees: Master Calendar Hearing → Individual (Merits) Hearing (1-5+ years backlog)
+- After IJ denial: 30 days to appeal to BIA
+- After BIA denial: 30 days to petition for review to Circuit Court of Appeals
+- Stays of removal may be requested pending appellate review
+
+FORM I-589 — KEY SECTIONS
+Part A: Biographical information
+Part B: Basis for claim (which grounds apply, narrative of persecution)
+Part C: Other information (prior applications, criminal history, etc.)
+Part D: Signature and attestation
+Supporting Documents: Identity documents, evidence of persecution, affidavits, country condition reports, medical or psychological evaluations, police reports
+
+LEGAL REPRESENTATION
+There is no right to government-appointed counsel in immigration proceedings. Applicants may be represented by: licensed attorneys, accredited representatives of recognized organizations, or law school clinical students under supervision. Many non-profit organizations provide free or low-cost immigration legal services to asylum seekers.
