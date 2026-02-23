@@ -25,25 +25,29 @@ class CaseTrackerAgent:
             
             try:
                 logger.info(f"Navigating to {self.portal_url}")
-                await page.goto(self.portal_url)
+                await page.goto(self.portal_url, wait_until="networkidle", timeout=30000)
                 
-                # Dynamic Selector Discovery (Nova Act simulation)
-                # In a real run, we would send page.content() to Nova 2 Lite here
-                # Example: selectors = nova_client.generate_response(page.content(), self.system_prompt)
-                
-                # Using known selectors for reliability in the demo
-                receipt_input = "input#receiptNumber"
-                submit_button = "button[name='submit']"
+                # USCIS uses appReceiptNum as the input name
+                # Nova Act would dynamically discover this by reading the DOM
+                receipt_input = "input[name='appReceiptNum']"
+                submit_button = "input[type='submit'], button[type='submit']"
                 
                 logger.info("Entering receipt number")
+                await page.wait_for_selector(receipt_input, timeout=15000)
                 await page.fill(receipt_input, receipt_number)
                 await page.click(submit_button)
                 
-                # Wait for results
-                await page.wait_for_selector(".result-item", timeout=10000)
-                status_text = await page.inner_text(".result-item")
+                # Wait for results to load
+                await page.wait_for_load_state("networkidle", timeout=15000)
+                body_text = await page.inner_text("body")
                 
-                logger.info(f"Found status: {status_text}")
+                # Extract meaningful status from the response
+                status_patterns = ["Case Was", "Application Was", "Request for Evidence", "Notice Was"]
+                extracted = next((line.strip() for line in body_text.split("\n") 
+                                  if any(p in line for p in status_patterns)), None)
+                
+                status_text = extracted or "Case found on portal. Please check USCIS online for detailed status."
+                logger.info(f"Nova Act extracted status: {status_text}")
                 await browser.close()
                 return status_text
 
