@@ -44,21 +44,27 @@ class NovaClient:
             logger.error(f"Error during audio transcription: {e}")
             raise
 
-    def generate_response(self, prompt, system_prompt="You are a helpful assistant for refugees."):
+    def generate_response(self, prompt, system_prompt="You are a helpful assistant for refugees.", history=None):
         """
-        Uses Nova Lite for text generation/reasoning.
-        Nova uses its own message schema - NOT Anthropic's.
+        Uses Nova Lite for text generation with optional multi-turn conversation history.
+        history: list of {"role": "user"|"assistant", "content": str}
         """
-        logger.info(f"Generating response with {NOVA_LITE_V1}")
+        logger.info(f"Generating response with {NOVA_LITE_V1} (history={len(history) if history else 0} turns)")
         try:
+            # Build messages array: prior history + current user message
+            messages = []
+            if history:
+                for turn in history:
+                    role = turn.get("role", "user")
+                    content = turn.get("content", "")
+                    if role in ("user", "assistant") and content:
+                        messages.append({"role": role, "content": [{"text": content}]})
+            # Append the current user message
+            messages.append({"role": "user", "content": [{"text": prompt}]})
+
             body = json.dumps({
                 "system": [{"text": system_prompt}],
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": [{"text": prompt}]
-                    }
-                ],
+                "messages": messages,
                 "inferenceConfig": {
                     "maxTokens": 1000,
                     "temperature": 0.7
@@ -73,7 +79,7 @@ class NovaClient:
             response_body = json.loads(response.get("body").read())
             # Nova response format: output.message.content[0].text
             text = response_body.get("output", {}).get("message", {}).get("content", [{}])[0].get("text", "")
-            
+
             logger.info("Response generation successful")
             return text
         except Exception as e:

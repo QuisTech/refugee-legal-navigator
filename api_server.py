@@ -184,6 +184,7 @@ async def startup_event():
 class ChatRequest(BaseModel):
     message: str
     language: str = "en"
+    history: list[dict] = []  # [{"role": "user"|"assistant", "content": str}]
 
 
 class ChatResponse(BaseModel):
@@ -245,10 +246,10 @@ async def chat(req: ChatRequest):
 
     try:
         nova = get_nova()
-        # Nova Lite call also in thread pool
-        response_text = await loop.run_in_executor(
-            _executor, nova.generate_response, req.message, system_prompt
-        )
+        # Build a lambda so we can pass history (run_in_executor only takes one callable + no kwargs)
+        def nova_call():
+            return nova.generate_response(req.message, system_prompt, history=req.history or [])
+        response_text = await loop.run_in_executor(_executor, nova_call)
         logger.info(f"Nova responded ({len(response_text)} chars)")
         return ChatResponse(
             response=response_text,
