@@ -13,6 +13,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
+import re
+from agents.case_tracker_agent import case_tracker
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -222,8 +225,6 @@ async def chat(req: ChatRequest):
 
     context = "\n\n".join(relevant_chunks)
     context_used = bool(relevant_chunks)
-
-    # Determine retrieval method for transparency
     retrieval_method = "titan-embed-text-v2 cosine similarity" if vector_store.ready else "keyword fallback"
 
     system_prompt = (
@@ -239,6 +240,25 @@ async def chat(req: ChatRequest):
             f"Use this legally grounded context retrieved via semantic similarity "
             f"(amazon.titan-embed-text-v2:0):\n\n"
             f"--- LEGAL CONTEXT ---\n{context}\n--- END CONTEXT ---\n\n"
+        )
+
+    # --- NOVA ACT AUTOMATION: Case Status Check ---
+    # Detect USCIS receipt number (e.g., MSC1234567890)
+    receipt_match = re.search(r"([A-Z]{3}\d{10})", req.message.upper())
+    is_status_check = "STATUS" in req.message.upper() or "TRACK" in req.message.upper()
+
+    if (is_status_check or "CHECK MY" in req.message.upper()) and receipt_match:
+        receipt_no = receipt_match.group(1)
+        logger.info(f"Triggering Nova Act UI Automation for receipt: {receipt_no}")
+        status_result = await loop.run_in_executor(_executor, case_tracker.check_status, receipt_no)
+        
+        # Ground the response in the automation result
+        system_prompt += (
+            f"\n\n--- NOVA ACT UI AUTOMATION RESULT ---\n"
+            f"The user is asking about case status for receipt {receipt_no}.\n"
+            f"The real-time status retrieved from the USCIS portal is: '{status_result}'.\n"
+            f"Provide this status to the user clearly.\n"
+            f"--- END AUTOMATION RESULT ---\n"
         )
 
     if req.language != "en":
