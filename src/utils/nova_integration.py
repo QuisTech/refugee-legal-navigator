@@ -3,10 +3,11 @@ import json
 import base64
 from src.utils.logger import logger
 
-# Model IDs
-NOVA_SONIC_V1 = "amzn.nova-2-sonic.v1"
-NOVA_LITE_V1 = "amzn.nova-2-lite.v1"
-EMBEDDING_V1 = "amazon.titan-embed-text-v1" # Adjust if Nova embeddings are specified differently
+# Model IDs - Correct Bedrock identifiers
+NOVA_SONIC_V1 = "amazon.nova-sonic-v1:0"    # Real-time bidirectional voice
+NOVA_LITE_V1 = "amazon.nova-lite-v1:0"      # Fast, cost-effective text/multimodal
+NOVA_PRO_V1 = "amazon.nova-pro-v1:0"        # Highest capability
+EMBEDDING_V1 = "amazon.titan-embed-text-v2:0"  # Titan embeddings (Nova embedding model)
 
 class NovaClient:
     def __init__(self, region_name="us-east-1"):
@@ -45,25 +46,23 @@ class NovaClient:
 
     def generate_response(self, prompt, system_prompt="You are a helpful assistant for refugees."):
         """
-        Uses Nova 2 Lite for text generation/reasoning.
+        Uses Nova Lite for text generation/reasoning.
+        Nova uses its own message schema - NOT Anthropic's.
         """
         logger.info(f"Generating response with {NOVA_LITE_V1}")
         try:
             body = json.dumps({
-                "anthropic_version": "bedrock-2023-05-31", # Nova Lite often uses Converse or standard schemas
-                "max_tokens": 1000,
-                "system": system_prompt,
+                "system": [{"text": system_prompt}],
                 "messages": [
                     {
                         "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": prompt
-                            }
-                        ]
+                        "content": [{"text": prompt}]
                     }
-                ]
+                ],
+                "inferenceConfig": {
+                    "maxTokens": 1000,
+                    "temperature": 0.7
+                }
             })
 
             response = self.bedrock_runtime.invoke_model(
@@ -72,11 +71,8 @@ class NovaClient:
             )
 
             response_body = json.loads(response.get("body").read())
-            # Handle different response formats if needed
-            content = response_body.get("content", [])
-            text = ""
-            if content:
-                text = content[0].get("text", "")
+            # Nova response format: output.message.content[0].text
+            text = response_body.get("output", {}).get("message", {}).get("content", [{}])[0].get("text", "")
             
             logger.info("Response generation successful")
             return text
@@ -106,6 +102,25 @@ class NovaClient:
             return response_body
         except Exception as e:
             logger.error(f"Error during speech synthesis: {e}")
+            raise
+
+    def get_embeddings(self, text):
+        """
+        Generates embeddings for a given text using Amazon Bedrock.
+        """
+        logger.info(f"Generating embeddings for text")
+        try:
+            body = json.dumps({
+                "inputText": text
+            })
+            response = self.bedrock_runtime.invoke_model(
+                modelId=EMBEDDING_V1,
+                body=body
+            )
+            response_body = json.loads(response.get("body").read())
+            return response_body.get("embedding")
+        except Exception as e:
+            logger.error(f"Error generating embeddings: {e}")
             raise
 
 # Singleton instance

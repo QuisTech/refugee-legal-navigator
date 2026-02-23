@@ -6,12 +6,50 @@ __pycache__/
 .Python
 env/
 venv/
-
-.env
-.venv
 *.egg-info/
 dist/
 build/
+
+# Environment & Secrets
+.env
+.env.*
+.env.local
+.env.production
+.env.staging
+*.env
+
+# AWS Credentials & Config
+.aws/
+aws-credentials
+credentials
+aws_credentials*
+*_credentials.json
+*_secrets.json
+
+# Private Keys & Certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+id_rsa
+id_ed25519
+*.ppk
+secrets/
+private/
+secrets.yaml
+secrets.yml
+
+# API Keys & Tokens
+*apikey*
+*api_key*
+*secret_key*
+*.token
+auth.json
+service-account*.json
+*_service_account.json
 
 # IDE
 .vscode/
@@ -23,7 +61,14 @@ build/
 .DS_Store
 Thumbs.db
 
+# Logs
+*.log
+logs/
+
 # Project specific
 data/*.db
-*.log
-.env.local
+
+# Node / Web dashboard
+webapp/node_modules/
+webapp/dist/
+webapp/.env
