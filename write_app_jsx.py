@@ -1,3 +1,8 @@
+import pathlib
+
+p = pathlib.Path(r'C:\Users\Administrator\Downloads\refugee-legal-navigator\webapp\src\App.jsx')
+
+content = """\
 import { useState, useEffect, useRef } from 'react'
 
 const RESPONSES = [
@@ -64,10 +69,10 @@ export default function App() {
   }
 
   const navItems = [
-    { id: 'assistant', label: 'AI Assistant', icon: '\uD83C\uDF99' },
-    { id: 'tracker', label: 'Case Tracker', icon: '\uD83D\uDCCB' },
-    { id: 'legal', label: 'Legal Screening', icon: '\u2696\uFE0F' },
-    { id: 'lawyers', label: 'Find Lawyers', icon: '\uD83D\uDC65' },
+    { id: 'assistant', label: 'AI Assistant', icon: '\\uD83C\\uDF99' },
+    { id: 'tracker', label: 'Case Tracker', icon: '\\uD83D\\uDCCB' },
+    { id: 'legal', label: 'Legal Screening', icon: '\\u2696\\uFE0F' },
+    { id: 'lawyers', label: 'Find Lawyers', icon: '\\uD83D\\uDC65' },
   ]
 
   return (
@@ -104,7 +109,7 @@ export default function App() {
             How can I help you?
           </h1>
           <p style={{ color: listening ? '#f87171' : '#6366f1', fontSize: 14, fontWeight: 500, transition: 'color 0.4s' }}>
-            {listening ? '\uD83D\uDD34 Listening for your voice...' : response ? '\u2705 Nova has responded' : 'Click the mic to speak'}
+            {listening ? '\\uD83D\\uDD34 Listening for your voice...' : response ? '\\u2705 Nova has responded' : 'Click the mic to speak'}
           </p>
         </div>
 
@@ -142,7 +147,7 @@ export default function App() {
               transition: 'all 0.3s ease',
               transform: listening ? 'scale(1.1)' : 'scale(1)'
             }}>
-              \uD83C\uDF99
+              \\uD83C\\uDF99
             </button>
           </div>
 
@@ -198,3 +203,11 @@ export default function App() {
     </div>
   )
 }
+"""
+
+p.write_text(content, encoding='utf-8')
+print(f'Written {p.stat().st_size} bytes')
+# Verify no corruption
+assert 'hsl(' in content
+assert 'ping' in content
+print('Validation OK')
