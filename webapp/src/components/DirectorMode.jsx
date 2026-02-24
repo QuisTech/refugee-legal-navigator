@@ -36,23 +36,23 @@ const SCRIPT = [
     { type: 'select', targetId: 'language-select', value: 'es-ES', delay: 1500 },
     { type: 'log', text: '[System] UI Language set to: Spanish (es-ES)', status: 'info' },
     { type: 'cursor', targetId: 'chat-input', delay: 500 },
-    { type: 'subtitle', text: 'La IA continúa la conversación sin problemas en español, manteniendo el contexto y la compasión.', lang: 'es-ES', delay: 7000 },
+    { type: 'subtitle', text: 'The AI continues the conversation seamlessly in Spanish, maintaining context and compassion.', voice: 'La IA continúa la conversación sin problemas en español, manteniendo el contexto y la compasión.', lang: 'es-ES', delay: 7000 },
     { type: 'log', text: '[Nova] Context preserved. Switching output locale to es-ES.', status: 'success' },
     { type: 'wait', delay: 6000 },
 
     // --- 2:00 - 2:45: STEP 3 - NOVA ACT AGENTIC AUTOMATION ---
-    { type: 'subtitle', text: 'Paso 3: Automatización Agéntica. Nuestra IA no solo habla; actúa.', lang: 'es-ES', delay: 6000 },
+    { type: 'subtitle', text: 'Step 3: Agentic Automation. Our AI doesn\'t just talk; it acts.', voice: 'Paso 3: Automatización Agéntica. Nuestra IA no solo habla; actúa.', lang: 'es-ES', delay: 6000 },
     { type: 'cursor', targetId: 'chat-input', delay: 2000 },
-    { type: 'subtitle', text: 'El usuario necesita rastrear su caso de USCIS. En lugar de enviarlo a un portal, la IA lo hace por ellos.', lang: 'es-ES', delay: 7000 },
+    { type: 'subtitle', text: 'The user needs to track their USCIS case status. Instead of sending them to a portal, the AI does it for them.', voice: 'El usuario necesita rastrear su caso de USCIS. En lugar de enviarlo a un portal, la IA lo hace por ellos.', lang: 'es-ES', delay: 7000 },
     { type: 'type', text: '¿Puedes consultar el estado de mi trámite para MSC2390123456?', targetId: 'chat-input', delay: 500 },
     { type: 'cursor', targetId: 'send-button', delay: 1000 },
     { type: 'click', targetId: 'send-button', delay: 500 },
-    { type: 'subtitle', text: 'Nova Act activa un agente personalizado de Playwright para navegar por el portal del gobierno en tiempo real.', lang: 'es-ES', delay: 6000 },
+    { type: 'subtitle', text: 'Nova Act triggers a custom Playwright agent to navigate the government portal in real-time.', voice: 'Nova Act activa un agente personalizado de Playwright para navegar por el portal del gobierno en tiempo real.', lang: 'es-ES', delay: 6000 },
     { type: 'log', text: '[Nova Act] UI Automation Triggered: USCIS Case Status Check', status: 'info' },
     { type: 'cursor', x: '50%', y: '40%', delay: 500 },
     { type: 'log', text: '[Nova Act] Navigating to my.uscis.gov/casestatus...', status: 'info' },
     { type: 'log', text: '[Nova Act] Status Extracted: "Decision Pending - Interview Scheduled"', status: 'success' },
-    { type: 'subtitle', text: 'El resultado se devuelve a la conversación, proporcionando actualizaciones instantáneas y útiles.', lang: 'es-ES', delay: 7000 },
+    { type: 'subtitle', text: 'The result is fed back into the conversation, providing instant, actionable updates.', voice: 'El resultado se devuelve a la conversación, proporcionando actualizaciones instantáneas y útiles.', lang: 'es-ES', delay: 7000 },
     { type: 'log', text: '[Nova] Su entrevista ha sido programada. ¿Le gustaría ver consejos de preparación?', status: 'info' },
     { type: 'wait', delay: 4000 },
 
@@ -95,7 +95,7 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
         for (let char of text) {
             current += char;
             onSetInputText(current);
-            await new Promise(r => setTimeout(r, 200 + Math.random() * 20)); // Slower typing for reality
+            await new Promise(r => setTimeout(r, 120 + Math.random() * 40)); 
         }
     };
 
@@ -164,7 +164,7 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
         for (const step of SCRIPT) {
             if (step.type === 'subtitle') {
                 setSubtitle(step.text);
-                speak(step.text, step.lang || 'en-US');
+                speak(step.voice || step.text, step.lang || 'en-US');
             } else if (step.type === 'log') {
                 addLog(step.text, step.status);
             }
@@ -244,8 +244,8 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
                 )}
             </AnimatePresence>
 
-            {/* Virtual Console - MOVED TO TOP LEFT */}
-            <div className="absolute top-40 left-10 w-96 bg-black/90 border border-white/20 rounded-2xl p-4 font-mono text-[10px] shadow-2xl backdrop-blur-md overflow-hidden">
+            {/* Virtual Console - MOVED TO BOTTOM LEFT, ABOVE CLEAR TAB */}
+            <div className="absolute bottom-32 left-8 w-96 bg-black/90 border border-white/20 rounded-2xl p-4 font-mono text-[10px] shadow-2xl backdrop-blur-md overflow-hidden">
                 <div className="flex justify-between border-b border-white/10 pb-2 mb-2 text-white/50 uppercase tracking-widest text-[8px]">
                     <span>Nova Console</span>
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
