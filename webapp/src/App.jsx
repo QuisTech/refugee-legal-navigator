@@ -351,7 +351,7 @@ export default function App() {
               dir={isRTL ? 'rtl' : 'ltr'}
               style={{ flex:1, padding:'14px 18px', borderRadius:14, background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', color:'#fff', fontSize:14, outline:'none' }}
             />
-            <button type="submit" disabled={loading || !inputText.trim()} style={{ padding:'14px 22px', borderRadius:14, background:'rgba(99,102,241,0.8)', border:'none', color:'#fff', fontSize:14, fontWeight:600, cursor:'pointer' }}>
+            <button id="send-button" type="submit" disabled={loading || !inputText.trim()} style={{ padding:'14px 22px', borderRadius:14, background:'rgba(99,102,241,0.8)', border:'none', color:'#fff', fontSize:14, fontWeight:600, cursor:'pointer' }}>
               Send
             </button>
           </form>
@@ -362,6 +362,8 @@ export default function App() {
         <DirectorMode 
           onClose={() => setDirectorMode(false)} 
           onSelectLanguage={(code) => setLang(code)}
+          onSetInputText={(val) => setInputText(val)}
+          onSendMessage={(val) => callNova(val)}
         />
       )}
 
