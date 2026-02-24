@@ -3,10 +3,9 @@ runtime: python3
 build:
   commands:
     build:
-      - pip install -r requirements.txt
-      - playwright install chromium
-      - playwright install-deps chromium
+      - python3 -m pip install -r requirements.txt
+      - python3 -m playwright install chromium
 run:
-  command: python api_server.py
+  command: python3 api_server.py
   network:
     port: 8000
