@@ -5,61 +5,61 @@ import { motion, AnimatePresence } from 'framer-motion';
 const SCRIPT = [
     // --- 0:00 - 0:30: INTRODUCTION & MISSION ---
     { type: 'cursor', x: '50%', y: '50%', delay: 2000 },
-    { type: 'subtitle', text: 'Scenario: Imagine being a refugee in a foreign land, seeking safety but blocked by complex legal jargon and language barriers.', delay: 6000 },
+    { type: 'subtitle', text: 'Scenario: Imagine being a refugee in a foreign land, seeking safety but blocked by complex legal jargon and language barriers.', lang: 'en-US', delay: 6000 },
     { type: 'log', text: '[System] Initializing Refugee Legal Navigator v1.0...', status: 'info' },
-    { type: 'cursor', x: '10%', y: '10%', delay: 500 },
-    { type: 'subtitle', text: 'We built the Refugee Legal Navigator to bridge this gap using the power of Amazon Nova and Agentic AI.', delay: 6000 },
+    { type: 'cursor', x: '10%', y: '40%', delay: 500 },
+    { type: 'subtitle', text: 'We built the Refugee Legal Navigator to bridge this gap using the power of Amazon Nova and Agentic AI.', lang: 'en-US', delay: 6000 },
     { type: 'log', text: '[System] Connected to amazon.nova-lite-v1:0', status: 'success' },
-    { type: 'cursor', x: '90%', y: '10%', delay: 500 },
+    { type: 'cursor', x: '90%', y: '40%', delay: 500 },
     { type: 'log', text: '[System] Connected to amazon.titan-embed-text-v2:0', status: 'success' },
     
     // --- 0:30 - 1:15: STEP 1 - LEGAL RAG (TRUTH & GROUNDING) ---
-    { type: 'subtitle', text: 'Step 1: Legally-Grounded Reasoning. We don\'t just use AI; we ground it in real asylum law.', delay: 6000 },
+    { type: 'subtitle', text: 'Step 1: Legally-Grounded Reasoning. We don\'t just use AI; we ground it in real asylum law.', lang: 'en-US', delay: 6000 },
     { type: 'cursor', targetId: 'chat-input', delay: 1500 },
-    { type: 'subtitle', text: 'The user asks about their rights under the 1951 Refugee Convention.', delay: 3000 },
+    { type: 'subtitle', text: 'The user asks about their rights under the 1951 Refugee Convention.', lang: 'en-US', delay: 3000 },
     { type: 'type', text: 'What are my rights as a refugee under international law?', targetId: 'chat-input', delay: 500 },
     { type: 'cursor', targetId: 'send-button', delay: 1000 },
     { type: 'click', targetId: 'send-button', delay: 500 },
     { type: 'log', text: '[Retrieval] Searching 5,600+ word legal corpus via Titan Embeddings...', status: 'info' },
     { type: 'cursor', x: '30%', y: '70%', delay: 500 },
     { type: 'log', text: '[Found] 1951 Convention Article 33 (Non-Refoulement)', status: 'success' },
-    { type: 'subtitle', text: 'Nova Lite analyzes the retrieved documents to provide a compassionate, legally-accurate response.', delay: 7000 },
+    { type: 'subtitle', text: 'Nova Lite analyzes the retrieved documents to provide a compassionate, legally-accurate response.', lang: 'en-US', delay: 7000 },
     { type: 'log', text: '[Nova] Responding with grounded context (Reference: UNHCR Article 33)', status: 'info' },
     { type: 'wait', delay: 5000 },
 
     // --- 1:15 - 2:00: STEP 2 - MULTILINGUAL INCLUSIVITY ---
-    { type: 'subtitle', text: 'Step 2: Radical Inclusivity. Legal aid is only useful if you can understand it.', delay: 6000 },
+    { type: 'subtitle', text: 'Step 2: Radical Inclusivity. Legal aid is only useful if you can understand it.', lang: 'en-US', delay: 6000 },
     { type: 'cursor', targetId: 'language-select', delay: 2000 },
-    { type: 'subtitle', text: 'We support 22 refugee-focused languages, including Spanish, Somali, Amharic, and Igbo.', delay: 6000 },
+    { type: 'subtitle', text: 'We support 22 refugee-focused languages, including Spanish, Somali, Amharic, and Igbo.', lang: 'en-US', delay: 6000 },
     { type: 'click', targetId: 'language-select', delay: 800 },
-    { type: 'subtitle', text: 'Let\'s switch to Spanish. Notice the UI instantly adapts to the selected locale.', delay: 6000 },
+    { type: 'subtitle', text: 'Let\'s switch to Spanish. Notice the UI instantly adapts to the selected locale.', lang: 'en-US', delay: 6000 },
     { type: 'select', targetId: 'language-select', value: 'es-ES', delay: 1500 },
     { type: 'log', text: '[System] UI Language set to: Spanish (es-ES)', status: 'info' },
     { type: 'cursor', targetId: 'chat-input', delay: 500 },
-    { type: 'subtitle', text: 'The AI continues the conversation seamlessly in Spanish, maintaining context and compassion.', delay: 7000 },
+    { type: 'subtitle', text: 'La IA continúa la conversación sin problemas en español, manteniendo el contexto y la compasión.', lang: 'es-ES', delay: 7000 },
     { type: 'log', text: '[Nova] Context preserved. Switching output locale to es-ES.', status: 'success' },
     { type: 'wait', delay: 6000 },
 
     // --- 2:00 - 2:45: STEP 3 - NOVA ACT AGENTIC AUTOMATION ---
-    { type: 'subtitle', text: 'Step 3: Agentic Automation. Our AI doesn\'t just talk; it acts.', delay: 6000 },
+    { type: 'subtitle', text: 'Paso 3: Automatización Agéntica. Nuestra IA no solo habla; actúa.', lang: 'es-ES', delay: 6000 },
     { type: 'cursor', targetId: 'chat-input', delay: 2000 },
-    { type: 'subtitle', text: 'The user needs to track their USCIS case status. Instead of sending them to a portal, the AI does it for them.', delay: 7000 },
-    { type: 'type', text: 'Can you check my status for MSC2390123456?', targetId: 'chat-input', delay: 500 },
+    { type: 'subtitle', text: 'El usuario necesita rastrear su caso de USCIS. En lugar de enviarlo a un portal, la IA lo hace por ellos.', lang: 'es-ES', delay: 7000 },
+    { type: 'type', text: '¿Puedes consultar el estado de mi trámite para MSC2390123456?', targetId: 'chat-input', delay: 500 },
     { type: 'cursor', targetId: 'send-button', delay: 1000 },
     { type: 'click', targetId: 'send-button', delay: 500 },
-    { type: 'subtitle', text: 'Nova Act triggers a custom Playwright agent to navigate the government portal in real-time.', delay: 6000 },
+    { type: 'subtitle', text: 'Nova Act activa un agente personalizado de Playwright para navegar por el portal del gobierno en tiempo real.', lang: 'es-ES', delay: 6000 },
     { type: 'log', text: '[Nova Act] UI Automation Triggered: USCIS Case Status Check', status: 'info' },
     { type: 'cursor', x: '50%', y: '40%', delay: 500 },
     { type: 'log', text: '[Nova Act] Navigating to my.uscis.gov/casestatus...', status: 'info' },
     { type: 'log', text: '[Nova Act] Status Extracted: "Decision Pending - Interview Scheduled"', status: 'success' },
-    { type: 'subtitle', text: 'The result is fed back into the conversation, providing instant, actionable updates.', delay: 7000 },
-    { type: 'log', text: '[Nova] Your interview has been scheduled. Would you like to see preparation tips?', status: 'info' },
+    { type: 'subtitle', text: 'El resultado se devuelve a la conversación, proporcionando actualizaciones instantáneas y útiles.', lang: 'es-ES', delay: 7000 },
+    { type: 'log', text: '[Nova] Su entrevista ha sido programada. ¿Le gustaría ver consejos de preparación?', status: 'info' },
     { type: 'wait', delay: 4000 },
 
     // --- 2:45 - 3:00: CONCLUSION & IMPACT ---
-    { type: 'subtitle', text: 'This is the Refugee Legal Navigator: A compassionate, autonomous agent for the most vulnerable.', delay: 7000 },
+    { type: 'subtitle', text: 'This is the Refugee Legal Navigator: A compassionate, autonomous agent for the most vulnerable.', lang: 'en-US', delay: 7000 },
     { type: 'log', text: '[System] Mission: Justice for All.', status: 'success' },
-    { type: 'subtitle', text: 'Built with Amazon Nova. Empowering human rights through Agentic AI.', delay: 7000 },
+    { type: 'subtitle', text: 'Built with Amazon Nova. Empowering human rights through Agentic AI.', lang: 'en-US', delay: 7000 },
     { type: 'cursor', x: '95%', y: '95%', delay: 1000 },
 ];
 
@@ -80,10 +80,11 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
         setLogs(prev => [...prev, { time, msg, status }].slice(-8));
     };
 
-    const speak = (text) => {
+    const speak = (text, lang = 'en-US') => {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
             utterance.rate = 1.0;
             window.speechSynthesis.speak(utterance);
         }
@@ -94,7 +95,7 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
         for (let char of text) {
             current += char;
             onSetInputText(current);
-            await new Promise(r => setTimeout(r, 30 + Math.random() * 40));
+            await new Promise(r => setTimeout(r, 200 + Math.random() * 20)); // Slower typing for reality
         }
     };
 
@@ -134,6 +135,7 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
             // 5 second countdown before script starts
             for (let i = 5; i > 0; i--) {
                 setSubtitle(`Recording starts in ${i}...`);
+                speak(`Recording starts in ${i}`, 'en-US');
                 await new Promise(r => setTimeout(r, 1000));
             }
             
@@ -162,7 +164,7 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
         for (const step of SCRIPT) {
             if (step.type === 'subtitle') {
                 setSubtitle(step.text);
-                speak(step.text);
+                speak(step.text, step.lang || 'en-US');
             } else if (step.type === 'log') {
                 addLog(step.text, step.status);
             }
@@ -209,6 +211,7 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
         
         stopRecording();
         setSubtitle("Saving Recording...");
+        speak("Saving your recording. Congratulations!", "en-US");
         setTimeout(onClose, 3000);
     };
 
@@ -241,8 +244,8 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
                 )}
             </AnimatePresence>
 
-            {/* Virtual Console */}
-            <div className="absolute bottom-10 left-10 w-96 bg-black/90 border border-white/20 rounded-2xl p-4 font-mono text-[10px] shadow-2xl backdrop-blur-md overflow-hidden">
+            {/* Virtual Console - MOVED TO TOP LEFT */}
+            <div className="absolute top-40 left-10 w-96 bg-black/90 border border-white/20 rounded-2xl p-4 font-mono text-[10px] shadow-2xl backdrop-blur-md overflow-hidden">
                 <div className="flex justify-between border-b border-white/10 pb-2 mb-2 text-white/50 uppercase tracking-widest text-[8px]">
                     <span>Nova Console</span>
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
