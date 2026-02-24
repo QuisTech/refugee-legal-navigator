@@ -7,8 +7,6 @@ __pycache__/
 env/
 venv/
 *.egg-info/
-# dist/ — scoped below per project
-/dist/
 /build/
 
 # Environment & Secrets
@@ -31,7 +29,7 @@ aws_credentials*
 *.pem
 *.key
 *.p12
-*.pfx
+*.pfax
 *.crt
 *.cer
 *.der
@@ -71,5 +69,5 @@ data/*.db
 
 # Node / Web dashboard
 webapp/node_modules/
-# webapp/dist/ is committed for cloud deployment (pre-built bundle)
 webapp/.env
+# webapp/dist is NOT ignored (delivered pre-built)
