@@ -79,7 +79,8 @@ def get_nova():
 
 
 # ── Vector store with disk cache ─────────────────────────────────────────────
-CACHE_PATH = os.path.join(os.path.dirname(__file__), "data", "embedding_cache.json")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CACHE_PATH = os.path.join(BASE_DIR, "data", "embedding_cache.json")
 
 class VectorStore:
     def __init__(self):
@@ -207,10 +208,22 @@ vector_store = VectorStore()
 @app.on_event("startup")
 async def startup_event():
     logger.info("=== Refugee Legal Navigator API starting up ===")
-    docs_dir = os.path.join(os.path.dirname(__file__), "data", "legal_docs")
-    # Run in thread pool so uvicorn stays responsive during startup
-    loop = asyncio.get_event_loop()
-    await loop.run_in_executor(_executor, vector_store.load_all_documents, docs_dir)
+    docs_dir = os.path.join(BASE_DIR, "data", "legal_docs")
+    # Mark where we are running for logs
+    logger.info(f"CWD: {os.getcwd()}")
+    logger.info(f"BASE_DIR: {BASE_DIR}")
+    
+    # Run heavy document loading in background to avoid blocking App Runner health checks
+    asyncio.create_task(background_startup(docs_dir))
+
+async def background_startup(docs_dir: str):
+    logger.info("Starting background document processing...")
+    try:
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(_executor, vector_store.load_all_documents, docs_dir)
+        logger.info("Background document processing finished")
+    except Exception as e:
+        logger.error(f"Background document processing failed: {e}")
 
 
 # ── Models ────────────────────────────────────────────────────────────────────
