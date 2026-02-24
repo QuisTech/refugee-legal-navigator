@@ -18,6 +18,8 @@ from agents.case_tracker_agent import case_tracker
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 logging.basicConfig(level=logging.INFO)
@@ -25,13 +27,29 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Refugee Legal Navigator API", version="1.0.0")
 
+# CORS remains for local dev
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve built frontend at root (production)
+DIST_DIR = os.path.join(os.path.dirname(__file__), "webapp", "dist")
+if os.path.exists(DIST_DIR):
+    app.mount("/assets", StaticFiles(directory=os.path.join(DIST_DIR, "assets")), name="assets")
+
+    @app.get("/")
+    async def serve_index():
+        return FileResponse(os.path.join(DIST_DIR, "index.html"))
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        # If it's not an API call, serve index.html for SPA routing
+        if not full_path.startswith("api/"):
+            return FileResponse(os.path.join(DIST_DIR, "index.html"))
 
 # Thread pool for blocking Titan calls
 _executor = ThreadPoolExecutor(max_workers=2)
