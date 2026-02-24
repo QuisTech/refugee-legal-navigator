@@ -4,7 +4,6 @@ RAG: amazon.titan-embed-text-v2:0 embeddings with disk cache + cosine similarity
 Query embedding pre-warmed from cached chunk embeddings (no per-request Titan call).
 """
 import os
-import sys
 import json
 import math
 import logging
@@ -34,20 +33,35 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve built frontend at root (production)
-DIST_DIR = os.path.join(os.path.dirname(__file__), "webapp", "dist")
-if os.path.exists(DIST_DIR):
-    app.mount("/assets", StaticFiles(directory=os.path.join(DIST_DIR, "assets")), name="assets")
+# Serve built frontend at root (production) — guarded so missing dist won't crash startup
+DIST_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "webapp", "dist")
+ASSETS_DIR = os.path.join(DIST_DIR, "assets")
+INDEX_FILE = os.path.join(DIST_DIR, "index.html")
+_frontend_available = (
+    os.path.isdir(DIST_DIR)
+    and os.path.isfile(INDEX_FILE)
+    and os.path.isdir(ASSETS_DIR)
+)
 
+if _frontend_available:
+    try:
+        app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
+        logger.info(f"Frontend static files mounted from {DIST_DIR}")
+    except Exception as e:
+        logger.warning(f"Could not mount static files: {e}")
+        _frontend_available = False
+
+if _frontend_available:
     @app.get("/")
     async def serve_index():
-        return FileResponse(os.path.join(DIST_DIR, "index.html"))
+        return FileResponse(INDEX_FILE)
 
     @app.get("/{full_path:path}")
     async def serve_spa(full_path: str):
-        # If it's not an API call, serve index.html for SPA routing
         if not full_path.startswith("api/"):
-            return FileResponse(os.path.join(DIST_DIR, "index.html"))
+            return FileResponse(INDEX_FILE)
+else:
+    logger.info("Running in API-only mode (no pre-built frontend found at webapp/dist)")
 
 # Thread pool for blocking Titan calls
 _executor = ThreadPoolExecutor(max_workers=2)

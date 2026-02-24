@@ -7,8 +7,9 @@ __pycache__/
 env/
 venv/
 *.egg-info/
-dist/
-build/
+# dist/ — scoped below per project
+/dist/
+/build/
 
 # Environment & Secrets
 .env
@@ -70,5 +71,5 @@ data/*.db
 
 # Node / Web dashboard
 webapp/node_modules/
-# webapp/dist/
+# webapp/dist/ is committed for cloud deployment (pre-built bundle)
 webapp/.env
