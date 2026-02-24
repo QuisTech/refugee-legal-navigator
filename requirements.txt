@@ -1,14 +1,9 @@
-# Nova AI SDKs (hypothetical - replace with actual packages)
-# nova-sonic-sdk
-# nova-lite-sdk
-# nova-act-sdk
-# nova-embeddings-sdk
-
-# Additional dependencies
-flask
+fastapi
+uvicorn
+pydantic
+boto3
+playwright
 requests
 python-dotenv
 pytest
 pandas
-# Add translation API client if needed
-# googletrans==4.0.0-rc1
