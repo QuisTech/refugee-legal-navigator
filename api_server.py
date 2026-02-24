@@ -33,10 +33,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# --- GLOBAL PATHS AND FRONTEND CONFIG ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Serve built frontend at root (production) — guarded so missing dist won't crash startup
-DIST_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "webapp", "dist")
+DIST_DIR = os.path.join(BASE_DIR, "webapp", "dist")
 ASSETS_DIR = os.path.join(DIST_DIR, "assets")
 INDEX_FILE = os.path.join(DIST_DIR, "index.html")
+
 _frontend_available = (
     os.path.isdir(DIST_DIR)
     and os.path.isfile(INDEX_FILE)
@@ -47,21 +50,32 @@ if _frontend_available:
     try:
         app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
         logger.info(f"Frontend static files mounted from {DIST_DIR}")
+        
+        @app.get("/")
+        async def serve_index():
+            return FileResponse(INDEX_FILE)
+
+        @app.get("/{full_path:path}")
+        async def serve_spa(full_path: str):
+            if not full_path.startswith("api/"):
+                return FileResponse(INDEX_FILE)
+            raise HTTPException(status_code=404, detail="API endpoint not found")
     except Exception as e:
         logger.warning(f"Could not mount static files: {e}")
         _frontend_available = False
 
-if _frontend_available:
+if not _frontend_available:
     @app.get("/")
-    async def serve_index():
-        return FileResponse(INDEX_FILE)
+    async def health_check_fallback():
+        return {
+            "status": "online",
+            "mode": "api-only",
+            "reason": "pre-built frontend not found at webapp/dist",
+            "checked_path": DIST_DIR
+        }
+    logger.info(f"Running in API-only mode. Checked path: {DIST_DIR}")
 
-    @app.get("/{full_path:path}")
-    async def serve_spa(full_path: str):
-        if not full_path.startswith("api/"):
-            return FileResponse(INDEX_FILE)
-else:
-    logger.info("Running in API-only mode (no pre-built frontend found at webapp/dist)")
+# thread pool...
 
 # Thread pool for blocking Titan calls
 _executor = ThreadPoolExecutor(max_workers=2)
@@ -79,7 +93,6 @@ def get_nova():
 
 
 # ── Vector store with disk cache ─────────────────────────────────────────────
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CACHE_PATH = os.path.join(BASE_DIR, "data", "embedding_cache.json")
 
 class VectorStore:
