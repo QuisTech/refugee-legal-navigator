@@ -11,10 +11,8 @@ import logging
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
-
 import re
-from agents.case_tracker_agent import case_tracker
+from src.agents.case_tracker_agent import case_tracker
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -60,7 +58,7 @@ _nova_client = None
 def get_nova():
     global _nova_client
     if _nova_client is None:
-        from utils.nova_integration import NovaClient
+        from src.utils.nova_integration import NovaClient
         _nova_client = NovaClient()
         logger.info("NovaClient initialised")
     return _nova_client

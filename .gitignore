@@ -70,5 +70,5 @@ data/*.db
 
 # Node / Web dashboard
 webapp/node_modules/
-webapp/dist/
+# webapp/dist/
 webapp/.env
