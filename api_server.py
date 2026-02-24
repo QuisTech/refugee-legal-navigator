@@ -12,7 +12,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
 import re
-from src.agents.case_tracker_agent import case_tracker
+from src.agents.case_tracker_agent import get_case_tracker
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -266,7 +266,7 @@ async def chat(req: ChatRequest):
     if (is_status_check or "CHECK MY" in req.message.upper()) and receipt_match:
         receipt_no = receipt_match.group(1)
         logger.info(f"Triggering Nova Act UI Automation for receipt: {receipt_no}")
-        status_result = await loop.run_in_executor(_executor, case_tracker.check_status, receipt_no)
+        status_result = await loop.run_in_executor(_executor, get_case_tracker().check_status, receipt_no)
         
         # Ground the response in the automation result
         system_prompt += (
