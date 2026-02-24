@@ -7,8 +7,10 @@ const SCRIPT = [
     { type: 'cursor', x: '50%', y: '50%', delay: 2000 },
     { type: 'subtitle', text: 'Scenario: Imagine being a refugee in a foreign land, seeking safety but blocked by complex legal jargon and language barriers.', delay: 6000 },
     { type: 'log', text: '[System] Initializing Refugee Legal Navigator v1.0...', status: 'info' },
+    { type: 'cursor', x: '10%', y: '10%', delay: 500 },
     { type: 'subtitle', text: 'We built the Refugee Legal Navigator to bridge this gap using the power of Amazon Nova and Agentic AI.', delay: 6000 },
     { type: 'log', text: '[System] Connected to amazon.nova-lite-v1:0', status: 'success' },
+    { type: 'cursor', x: '90%', y: '10%', delay: 500 },
     { type: 'log', text: '[System] Connected to amazon.titan-embed-text-v2:0', status: 'success' },
     
     // --- 0:30 - 1:15: STEP 1 - LEGAL RAG (TRUTH & GROUNDING) ---
@@ -19,6 +21,7 @@ const SCRIPT = [
     { type: 'cursor', targetId: 'send-button', delay: 1000 },
     { type: 'click', targetId: 'send-button', delay: 500 },
     { type: 'log', text: '[Retrieval] Searching 5,600+ word legal corpus via Titan Embeddings...', status: 'info' },
+    { type: 'cursor', x: '30%', y: '70%', delay: 500 },
     { type: 'log', text: '[Found] 1951 Convention Article 33 (Non-Refoulement)', status: 'success' },
     { type: 'subtitle', text: 'Nova Lite analyzes the retrieved documents to provide a compassionate, legally-accurate response.', delay: 7000 },
     { type: 'log', text: '[Nova] Responding with grounded context (Reference: UNHCR Article 33)', status: 'info' },
@@ -27,13 +30,14 @@ const SCRIPT = [
     // --- 1:15 - 2:00: STEP 2 - MULTILINGUAL INCLUSIVITY ---
     { type: 'subtitle', text: 'Step 2: Radical Inclusivity. Legal aid is only useful if you can understand it.', delay: 6000 },
     { type: 'cursor', targetId: 'language-select', delay: 2000 },
-    { type: 'subtitle', text: 'We support 22 refugee-focused languages, including Arabic, Somali, Amharic, and Igbo.', delay: 6000 },
+    { type: 'subtitle', text: 'We support 22 refugee-focused languages, including Spanish, Somali, Amharic, and Igbo.', delay: 6000 },
     { type: 'click', targetId: 'language-select', delay: 800 },
-    { type: 'subtitle', text: 'Let\'s switch to Arabic. Notice the UI instantly adapts to Right-to-Left (RTL) formatting.', delay: 6000 },
-    { type: 'select', targetId: 'language-select', value: 'ar-SA', delay: 1500 },
-    { type: 'log', text: '[System] UI Direction set to RTL (Arabic)', status: 'info' },
-    { type: 'subtitle', text: 'The AI continues the conversation seamlessly in the new language, maintaining context and compassion.', delay: 7000 },
-    { type: 'log', text: '[Nova] Context preserved. Switching output locale to ar-SA.', status: 'success' },
+    { type: 'subtitle', text: 'Let\'s switch to Spanish. Notice the UI instantly adapts to the selected locale.', delay: 6000 },
+    { type: 'select', targetId: 'language-select', value: 'es-ES', delay: 1500 },
+    { type: 'log', text: '[System] UI Language set to: Spanish (es-ES)', status: 'info' },
+    { type: 'cursor', targetId: 'chat-input', delay: 500 },
+    { type: 'subtitle', text: 'The AI continues the conversation seamlessly in Spanish, maintaining context and compassion.', delay: 7000 },
+    { type: 'log', text: '[Nova] Context preserved. Switching output locale to es-ES.', status: 'success' },
     { type: 'wait', delay: 6000 },
 
     // --- 2:00 - 2:45: STEP 3 - NOVA ACT AGENTIC AUTOMATION ---
@@ -45,6 +49,7 @@ const SCRIPT = [
     { type: 'click', targetId: 'send-button', delay: 500 },
     { type: 'subtitle', text: 'Nova Act triggers a custom Playwright agent to navigate the government portal in real-time.', delay: 6000 },
     { type: 'log', text: '[Nova Act] UI Automation Triggered: USCIS Case Status Check', status: 'info' },
+    { type: 'cursor', x: '50%', y: '40%', delay: 500 },
     { type: 'log', text: '[Nova Act] Navigating to my.uscis.gov/casestatus...', status: 'info' },
     { type: 'log', text: '[Nova Act] Status Extracted: "Decision Pending - Interview Scheduled"', status: 'success' },
     { type: 'subtitle', text: 'The result is fed back into the conversation, providing instant, actionable updates.', delay: 7000 },
@@ -187,13 +192,9 @@ export function DirectorMode({ onClose, onSelectLanguage, onSetInputText, onSend
                 await new Promise(r => setTimeout(r, 200));
                 const el = document.getElementById(step.targetId);
                 if (el) {
+                    // CRITICAL FIX: Just click the element. 
+                    // If it's the send-button, the form onSubmit will trigger once.
                     el.click();
-                    // If it's the send button, trigger the actual App action
-                    if (step.targetId === 'send-button') {
-                        // Finding the value from the input field if possible, or just using onSendMessage
-                        const input = document.getElementById('chat-input');
-                        if (input) onSendMessage(input.value);
-                    }
                 }
                 await new Promise(r => setTimeout(r, 200));
                 setIsClicking(false);
