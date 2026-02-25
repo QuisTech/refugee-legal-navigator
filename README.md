@@ -183,9 +183,12 @@ Simply connect your GitHub repository to an App Runner service and it will auto-
 | Tigrinya | `ti` | ትግርኛ        |
 | Somali   | `so` | Soomaali    |
 | Pashto   | `ps` | پښتو        |
-| Yoruba   | `yo` | Yorùbá      |
-| Igbo     | `ig` | Igbo        |
 | Hausa    | `ha` | Hausa       |
+| Igbo     | `ig` | Igbo        |
+| Yoruba   | `yo` | Yorùbá      |
+
+> [!NOTE]
+> **Cultural Focus**: The addition of **Igbo** and **Yoruba** support was a deliberate decision to better serve the West African refugee community, ensuring they have equitable access to legal navigator resources in their native tongues.
 
 ---
 
