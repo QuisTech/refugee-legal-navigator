@@ -265,19 +265,26 @@ async def chat(req: ChatRequest):
     receipt_match = re.search(r"([A-Z]{3}\d{10})", req.message.upper())
     is_status_check = "STATUS" in req.message.upper() or "TRACK" in req.message.upper()
 
-    if (is_status_check or "CHECK MY" in req.message.upper()) and receipt_match:
-        receipt_no = receipt_match.group(1)
-        logger.info(f"Triggering Nova Act UI Automation for receipt: {receipt_no}")
-        status_result = await loop.run_in_executor(_executor, get_case_tracker().check_status, receipt_no)
-        
-        # Ground the response in the automation result
-        system_prompt += (
-            f"\n\n--- NOVA ACT UI AUTOMATION RESULT ---\n"
-            f"The user is asking about case status for receipt {receipt_no}.\n"
-            f"The real-time status retrieved from the USCIS portal is: '{status_result}'.\n"
-            f"Provide this status to the user clearly.\n"
-            f"--- END AUTOMATION RESULT ---\n"
-        )
+    if (is_status_check or "CHECK MY" in req.message.upper()):
+        if receipt_match:
+            receipt_no = receipt_match.group(1)
+            logger.info(f"Triggering Nova Act UI Automation for receipt: {receipt_no}")
+            status_result = await loop.run_in_executor(_executor, get_case_tracker().check_status, receipt_no)
+            
+            system_prompt += (
+                f"\n\n--- NOVA ACT UI AUTOMATION RESULT ---\n"
+                f"The user is asking about case status for receipt {receipt_no}.\n"
+                f"The real-time status retrieved from the USCIS portal is: '{status_result}'.\n"
+                f"Provide this status to the user clearly.\n"
+                f"--- END AUTOMATION RESULT ---\n"
+            )
+        else:
+            system_prompt += (
+                "\n\n--- INSTRUCTION ---\n"
+                "The user wants to check their USCIS case status but did not provide a receipt number. "
+                "Politely ask them to provide their 13-character USCIS receipt number (e.g., MSC1234567890) "
+                "so you can track it for them using the automated system.\n"
+            )
 
     if req.language != "en":
         system_prompt += f"Respond in the user's language: {req.language}.\n"
