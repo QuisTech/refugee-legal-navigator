@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { DirectorMode } from './components/DirectorMode'
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8000' : ''
 const NUM_BARS = 28
 
 // Key refugee languages: BCP-47 tag, native name, English name
