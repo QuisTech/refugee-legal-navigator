@@ -22,6 +22,9 @@ from pydantic import BaseModel
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# ── Path constants (must be defined early) ────────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 app = FastAPI(title="Refugee Legal Navigator API", version="1.0.0")
 
 # CORS remains for local dev
@@ -34,19 +37,6 @@ app.add_middleware(
 )
 
 # SPA/Static routes will be defined last to avoid shadowing API endpoints.
-
-if not _frontend_available:
-    @app.get("/")
-    async def health_check_fallback():
-        return {
-            "status": "online",
-            "mode": "api-only",
-            "reason": "pre-built frontend not found at webapp/dist",
-            "checked_path": DIST_DIR
-        }
-    logger.info(f"Running in API-only mode. Checked path: {DIST_DIR}")
-
-# thread pool...
 
 # Thread pool for blocking Titan calls
 _executor = ThreadPoolExecutor(max_workers=2)
@@ -65,6 +55,7 @@ def get_nova():
 
 # ── Vector store with disk cache ─────────────────────────────────────────────
 CACHE_PATH = os.path.join(BASE_DIR, "data", "embedding_cache.json")
+
 
 class VectorStore:
     def __init__(self):
@@ -322,7 +313,6 @@ async def chat(req: ChatRequest):
 
 
 # ── Static File / SPA Routing (Defined last to avoid shadowing API) ──────────
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DIST_DIR = os.path.join(BASE_DIR, "webapp", "dist")
 ASSETS_DIR = os.path.join(DIST_DIR, "assets")
 INDEX_FILE = os.path.join(DIST_DIR, "index.html")
