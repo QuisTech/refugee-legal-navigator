@@ -6,6 +6,6 @@ build:
       - python3 -m pip install -r requirements.txt
       - python3 -m playwright install chromium
 run:
-  command: uvicorn api_server:app --host 0.0.0.0 --port 8000 --log-level info
+  command: python3 -m uvicorn api_server:app --host 0.0.0.0 --port 8000 --log-level info
   network:
     port: 8000
