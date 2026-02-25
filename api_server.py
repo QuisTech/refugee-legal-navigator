@@ -33,36 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- GLOBAL PATHS AND FRONTEND CONFIG ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Serve built frontend at root (production) — guarded so missing dist won't crash startup
-DIST_DIR = os.path.join(BASE_DIR, "webapp", "dist")
-ASSETS_DIR = os.path.join(DIST_DIR, "assets")
-INDEX_FILE = os.path.join(DIST_DIR, "index.html")
-
-_frontend_available = (
-    os.path.isdir(DIST_DIR)
-    and os.path.isfile(INDEX_FILE)
-    and os.path.isdir(ASSETS_DIR)
-)
-
-if _frontend_available:
-    try:
-        app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
-        logger.info(f"Frontend static files mounted from {DIST_DIR}")
-        
-        @app.get("/")
-        async def serve_index():
-            return FileResponse(INDEX_FILE)
-
-        @app.get("/{full_path:path}")
-        async def serve_spa(full_path: str):
-            if not full_path.startswith("api/"):
-                return FileResponse(INDEX_FILE)
-            raise HTTPException(status_code=404, detail="API endpoint not found")
-    except Exception as e:
-        logger.warning(f"Could not mount static files: {e}")
-        _frontend_available = False
+# SPA/Static routes will be defined last to avoid shadowing API endpoints.
 
 if not _frontend_available:
     @app.get("/")
@@ -350,6 +321,43 @@ async def chat(req: ChatRequest):
         )
 
 
+# ── Static File / SPA Routing (Defined last to avoid shadowing API) ──────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DIST_DIR = os.path.join(BASE_DIR, "webapp", "dist")
+ASSETS_DIR = os.path.join(DIST_DIR, "assets")
+INDEX_FILE = os.path.join(DIST_DIR, "index.html")
+
+_frontend_available = (
+    os.path.isdir(DIST_DIR)
+    and os.path.isfile(INDEX_FILE)
+    and os.path.isdir(ASSETS_DIR)
+)
+
+if _frontend_available:
+    try:
+        app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
+        logger.info(f"Frontend static files mounted from {DIST_DIR}")
+        
+        @app.get("/")
+        async def serve_index():
+            return FileResponse(INDEX_FILE)
+
+        @app.get("/{full_path:path}")
+        async def serve_spa(full_path: str):
+            if not full_path.startswith("api/"):
+                return FileResponse(INDEX_FILE)
+            raise HTTPException(status_code=404, detail="API endpoint not found")
+    except Exception as e:
+        logger.warning(f"Static mount failed: {e}")
+        _frontend_available = False
+
+if not _frontend_available:
+    @app.get("/")
+    async def health_check_fallback():
+        return {"status": "online", "mode": "api-only", "path_checked": DIST_DIR}
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
+    # Honor PORT env var for cloud compatibility
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port, reload=False)

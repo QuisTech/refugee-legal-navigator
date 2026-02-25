@@ -1,0 +1,9 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+.env
+webapp/node_modules/
+webapp/dist/ (only if building in cloud, but we are committing it, so leave it)
