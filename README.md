@@ -10,9 +10,13 @@
 
 ## 💡 Inspiration
 
-Over **100 million people** worldwide are forcibly displaced. Most face an overwhelming legal system in a language they don't speak. Asylum seekers routinely miss critical filing deadlines, misunderstand their eligibility, or simply can't afford legal counsel.
+A mother fleeing violence arrives at the border with her two children. She doesn't speak English. She doesn't understand asylum law.
 
-We asked: **What if AI could be the first line of legal guidance** — available 24/7, in a refugee's native language, grounded in real immigration law?
+**Here's what the data says:** Detained asylum seekers with legal representation are **five times more likely** to win their cases. Yet most face the system alone.
+
+Every year, hundreds of thousands navigate complex refugee law without representation. They lose not because their cases lack merit — but because they lack access to clear, understandable guidance in their own language.
+
+Refugee Legal Navigator was built to close that gap.
 
 ---
 
