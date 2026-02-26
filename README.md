@@ -6,6 +6,8 @@
 [![Built With](https://img.shields.io/badge/Built_With-Amazon_Nova-blue?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/ai/generative-ai/nova/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
+![Refugee Legal Navigator Demo](webapp/public/assets/demo.gif)
+
 ---
 
 ## 💡 Inspiration
