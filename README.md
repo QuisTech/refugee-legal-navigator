@@ -50,23 +50,34 @@ A built-in automated demo system that showcases all features with synchronized n
 
 ## 🏗️ Architecture
 
+### System Flow (Mermaid)
+
+```mermaid
+graph TD
+    User([User]) <--> Frontend[React Frontend - Vite]
+    
+    subgraph "Backend Layer (FastAPI)"
+        Frontend <--> API[API Endpoints: /chat, /track-case, /health]
+        API <--> RAG[RAG Pipeline]
+        API <--> CaseTracker[Case Tracker Agent]
+    end
+
+    subgraph "AI & Data Layer (AWS Bedrock)"
+        RAG <--> NovaLite[Amazon Nova Lite - Chat LLM]
+        RAG <--> TitanEmbed[Amazon Titan Embeddings - Vector RAG]
+        CaseTracker <--> NovaAct[Amazon Nova Act - Browser Automation]
+        API <--> NovaSonic[Amazon Nova Sonic - TTS Voice]
+        TitanEmbed <--> LocalCache[(Local Vector Cache)]
+    end
+
+    subgraph "External Resources"
+        NovaAct <--> USCIS[[USCIS Portal]]
+        TitanEmbed <--> LegalDocs[(Legal Corpus - Asylum Law)]
+    end
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    React Frontend (Vite)                 │
-│  Glassmorphism UI · Framer Motion · Voice Waveform      │
-│  Multilingual Chat · Director Mode · Case Tracker UI    │
-└──────────────────────┬──────────────────────────────────┘
-                       │ /api/chat, /api/health,
-                       │ /api/track-case
-┌──────────────────────▼──────────────────────────────────┐
-│               FastAPI Backend (api_server.py)            │
-│  RAG Pipeline · Background Startup · Lazy Init Clients  │
-├─────────────┬──────────────┬────────────┬───────────────┤
-│ Nova Lite   │ Titan Embed  │ Nova Act   │ Nova Sonic    │
-│ (Chat LLM)  │ (RAG Vectors)│ (Browser   │ (Voice TTS)   │
-│             │              │ Automation)│               │
-└─────────────┴──────────────┴────────────┴───────────────┘
-```
+
+### High-Level Architecture
+- **Architecture Diagram**: ![Architecture Diagram](webapp/public/assets/architecture_diagram.png)
 
 ---
 
