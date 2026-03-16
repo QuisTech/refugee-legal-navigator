@@ -77,7 +77,7 @@ graph TD
 ```
 
 ### High-Level Architecture
-- **Architecture Diagram**: ![Architecture Diagram](webapp/public/assets/architecture_diagram.png)
+- **Architecture Diagram**: ![Architecture Diagram](https://raw.githubusercontent.com/QuisTech/refugee-legal-navigator/main/webapp/public/assets/architecture_diagram.png)
 
 ---
 

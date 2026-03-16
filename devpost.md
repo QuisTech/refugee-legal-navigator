@@ -28,7 +28,7 @@ graph TD
 ```
 
 ### Visual Architecture
-- **Architecture Diagram**: ![Architecture Diagram](webapp/public/assets/architecture_diagram.png)
+- **Architecture Diagram**: ![Architecture Diagram](https://raw.githubusercontent.com/QuisTech/refugee-legal-navigator/main/webapp/public/assets/architecture_diagram.png)
 
 ## 💡 Inspiration
 Refugee Legal Navigator was built to help asylum seekers navigate complex legal systems using the power of generative AI. Detention centers and border crossings are often chaotic, and legal representation is scarce. This tool provides a first-line multilingual assistant to help people understand their rights and track their cases autonomously.
